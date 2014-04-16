@@ -4,6 +4,8 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.SimpleColoredComponent;
 import com.jetbrains.php.PhpIcons;
+import fr.adrienbrault.idea.io.FileFactory;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2Icons;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import fr.adrienbrault.idea.symfony2plugin.profiler.dict.DefaultDataCollector;
@@ -18,7 +20,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Symfony2WebProfilerForm {
@@ -161,12 +162,12 @@ public class Symfony2WebProfilerForm {
 
 
     @Nullable
-    protected File getTranslationFile() {
+    protected IFile getTranslationFile() {
 
         Symfony2ProjectComponent symfony2ProjectComponent = this.project.getComponent(Symfony2ProjectComponent.class);
-        for(File file: symfony2ProjectComponent.getContainerFiles()) {
+        for(IFile file: symfony2ProjectComponent.getContainerFiles()) {
             if(file.exists()) {
-                File translationRootPath = new File(file.getParentFile().getPath() + "/profiler/index.csv");
+                IFile translationRootPath = FileFactory.create(file.getParentFile().getPath() + "/profiler/index.csv");
                 if (!translationRootPath.exists()) {
                     return translationRootPath;
                 }

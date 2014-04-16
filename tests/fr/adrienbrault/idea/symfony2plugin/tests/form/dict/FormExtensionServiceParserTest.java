@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.tests.form.dict;
 
+import fr.adrienbrault.idea.io.File.Filesystem;
 import fr.adrienbrault.idea.symfony2plugin.form.dict.FormExtensionServiceParser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class FormExtensionServiceParserTest extends Assert {
     @Test
     public void testParse() throws Exception {
 
-        File testFile = new File(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
+        Filesystem testFile = new Filesystem(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
 
         FormExtensionServiceParser formExtensionServiceParser = new FormExtensionServiceParser();
         formExtensionServiceParser.parser(testFile);

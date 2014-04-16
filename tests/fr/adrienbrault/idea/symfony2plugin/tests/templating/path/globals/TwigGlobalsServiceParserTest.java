@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.tests.templating.path.globals;
 
+import fr.adrienbrault.idea.io.File.Filesystem;
 import fr.adrienbrault.idea.symfony2plugin.templating.globals.TwigGlobalEnum;
 import fr.adrienbrault.idea.symfony2plugin.templating.globals.TwigGlobalsServiceParser;
 import org.junit.Assert;
@@ -12,7 +13,7 @@ public class TwigGlobalsServiceParserTest extends Assert {
     @Test
     public void testParse() throws Exception {
 
-        File testFile = new File(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
+        Filesystem testFile = new Filesystem(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
 
         TwigGlobalsServiceParser parser = new TwigGlobalsServiceParser();
         parser.parser(testFile);

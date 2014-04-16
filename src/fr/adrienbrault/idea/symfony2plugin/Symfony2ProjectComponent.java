@@ -12,6 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.psi.PsiElement;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.dic.ContainerFile;
 import fr.adrienbrault.idea.symfony2plugin.extension.ServiceContainerLoader;
 import fr.adrienbrault.idea.symfony2plugin.extension.ServiceContainerLoaderParameter;
@@ -129,11 +130,11 @@ public class Symfony2ProjectComponent implements ProjectComponent {
         return routes;
     }
 
-    public List<File> getContainerFiles() {
+    public List<IFile> getContainerFiles() {
         return this.getContainerFiles(true);
     }
 
-    public List<File> getContainerFiles(boolean attachSetting) {
+    public List<IFile> getContainerFiles(boolean attachSetting) {
 
         List<ContainerFile> containerFiles = new ArrayList<ContainerFile>();
 
@@ -147,7 +148,7 @@ public class Symfony2ProjectComponent implements ProjectComponent {
             containerFiles.add(new ContainerFile(Settings.DEFAULT_CONTAINER_PATH));
         }
 
-        ArrayList<File> validFiles = new ArrayList<File>();
+        ArrayList<IFile> validFiles = new ArrayList<IFile>();
         for(ContainerFile containerFile : containerFiles) {
             if(containerFile.exists(this.project)) {
                 validFiles.add(containerFile.getFile(this.project));

@@ -14,6 +14,7 @@ import com.intellij.psi.xml.XmlAttribute;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlTagValue;
+import fr.adrienbrault.idea.io.FileFactory;
 import fr.adrienbrault.idea.symfony2plugin.config.component.parser.ParameterServiceParser;
 import fr.adrienbrault.idea.symfony2plugin.dic.ContainerService;
 import fr.adrienbrault.idea.symfony2plugin.dic.ServiceMap;
@@ -110,7 +111,8 @@ public class XmlHelper {
         VirtualFile virtualFile = psiElement.getContainingFile().getOriginalFile().getVirtualFile();
         if(virtualFile != null) {
             ParameterServiceParser parameterServiceParser = new ParameterServiceParser();
-            parameterServiceParser.parser(VfsUtil.virtualToIoFile(virtualFile));
+
+            parameterServiceParser.parser(FileFactory.create(VfsUtil.virtualToIoFile(virtualFile)));
             HashMap<String, String> unknownParameterMap = new HashMap<String, String>();
 
             for(Map.Entry<String, String> entry: parameterServiceParser.getParameterMap().entrySet()) {

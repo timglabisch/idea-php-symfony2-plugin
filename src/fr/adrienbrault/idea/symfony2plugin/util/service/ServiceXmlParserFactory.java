@@ -1,10 +1,10 @@
 package fr.adrienbrault.idea.symfony2plugin.util.service;
 
 import com.intellij.openapi.project.Project;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +23,12 @@ public class ServiceXmlParserFactory {
         this.project = project;
     }
 
-    protected boolean isModified(List<File> serviceFiles) {
+    protected boolean isModified(List<IFile> serviceFiles) {
         if(this.serviceFiles.size() != serviceFiles.size()) {
             return true;
         }
 
-        for(File serviceFile: serviceFiles) {
+        for(IFile serviceFile: serviceFiles) {
             if(serviceFile.exists()) {
                 if(!this.serviceFiles.containsKey(serviceFile.getAbsolutePath())) {
                     return true;
@@ -49,7 +49,7 @@ public class ServiceXmlParserFactory {
 
         Symfony2ProjectComponent symfony2ProjectComponent = this.project.getComponent(Symfony2ProjectComponent.class);
 
-        List<File> settingsServiceFiles = symfony2ProjectComponent.getContainerFiles();
+        List<IFile> settingsServiceFiles = symfony2ProjectComponent.getContainerFiles();
 
         if (this.serviceParserInstance != null && !this.isModified(settingsServiceFiles)) {
             return (T) this.serviceParserInstance;
@@ -64,7 +64,7 @@ public class ServiceXmlParserFactory {
 
         if (this.serviceParserInstance != null) {
             this.serviceFiles = new HashMap<String, Long>();
-            for(File settingsServiceFile: settingsServiceFiles) {
+            for(IFile settingsServiceFile: settingsServiceFiles) {
                 if(settingsServiceFile.exists()) {
                     this.serviceParserInstance.parser(settingsServiceFile);
                     serviceFiles.put(settingsServiceFile.getAbsolutePath(), settingsServiceFile.lastModified());

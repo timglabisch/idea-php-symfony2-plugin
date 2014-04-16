@@ -1,10 +1,10 @@
 package fr.adrienbrault.idea.symfony2plugin.doctrine.component;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.service.AbstractServiceParser;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,7 +18,7 @@ public class DocumentNamespacesParser extends AbstractServiceParser {
         return "/container/services/service[@id[starts-with(.,'doctrine_mongodb.odm.')]]//call[@method='setDocumentNamespaces']//argument[@key]";
     }
 
-    public void parser(File file) {
+    public void parser(IFile file) {
         NodeList nodeList = this.parserer(file);
 
         if(nodeList == null) {

@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.tests.dic;
 
+import fr.adrienbrault.idea.io.File.Filesystem;
 import fr.adrienbrault.idea.symfony2plugin.dic.XmlTagParser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class XmlTagParserTest extends Assert {
     @Test
     public void testParse() throws Exception {
 
-        File testFile = new File(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
+        Filesystem testFile = new Filesystem(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
 
         XmlTagParser xmlTagParser = new XmlTagParser();
         xmlTagParser.parser(testFile);

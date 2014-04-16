@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.config.component.parser;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.translation.dict.DomainFileMap;
 import fr.adrienbrault.idea.symfony2plugin.util.service.AbstractServiceParser;
 import org.w3c.dom.Element;
@@ -20,7 +21,7 @@ public class ParameterServiceParser extends AbstractServiceParser {
         return "/container/parameters/parameter[@key]";
     }
 
-    public void parser(File file) {
+    public void parser(IFile file) {
         NodeList nodeList = this.parserer(file);
 
         if(nodeList == null) {

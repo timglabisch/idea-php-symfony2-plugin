@@ -1,10 +1,10 @@
 package fr.adrienbrault.idea.symfony2plugin.form.dict;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.service.AbstractServiceParser;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class FormTypeServiceParser extends AbstractServiceParser {
         return "/container/services/service[@id='form.registry']//service[@class]/argument[@type='collection'][1]/argument[@key]";
     }
 
-    public void parser(File file) {
+    public void parser(IFile file) {
         NodeList nodeList = this.parserer(file);
 
         if(nodeList == null) {

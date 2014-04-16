@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.dic;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.service.AbstractServiceParser;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Element;
@@ -20,7 +21,7 @@ public class XmlTagParser extends AbstractServiceParser {
         return "/container/services/service[@id]/tag[@name]";
     }
 
-    public void parser(File file) {
+    public void parser(IFile file) {
         NodeList nodeList = this.parserer(file);
 
         if(nodeList == null) {

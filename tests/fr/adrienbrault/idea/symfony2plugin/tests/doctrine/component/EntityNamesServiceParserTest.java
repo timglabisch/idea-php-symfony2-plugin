@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.tests.doctrine.component;
 
+import fr.adrienbrault.idea.io.File.Filesystem;
 import fr.adrienbrault.idea.symfony2plugin.doctrine.component.EntityNamesServiceParser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class EntityNamesServiceParserTest extends Assert {
     @Test
     public void testParse() throws Exception {
 
-        File testFile = new File(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
+        Filesystem testFile = new Filesystem(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
         EntityNamesServiceParser entityNamesServiceParser = new EntityNamesServiceParser();
         entityNamesServiceParser.parser(testFile);
         Map<String, String> map = entityNamesServiceParser.getEntityNameMap();

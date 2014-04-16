@@ -2,6 +2,8 @@ package fr.adrienbrault.idea.symfony2plugin.translation;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
+import fr.adrienbrault.idea.io.FileFactory;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Settings;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import fr.adrienbrault.idea.symfony2plugin.translation.parser.TranslationPsiParser;
@@ -9,7 +11,6 @@ import fr.adrienbrault.idea.symfony2plugin.translation.parser.TranslationStringM
 import fr.adrienbrault.idea.symfony2plugin.translation.parser.TranslationStringParser;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class TranslationIndex {
             return this.translationStringMap;
         }
 
-        File translationDirectory = this.getTranslationRoot();
+        IFile translationDirectory = this.getTranslationRoot();
         if(null == translationDirectory) {
             return new TranslationStringMap();
         }
@@ -61,7 +62,7 @@ public class TranslationIndex {
     protected boolean isCacheValid() {
 
         // symfony2 recreates translation file on change, so folder modtime is caching indicator
-        File translationRootPath = this.getTranslationRoot();
+        IFile translationRootPath = this.getTranslationRoot();
         if (null == translationRootPath) {
             return false;
         }
@@ -71,14 +72,14 @@ public class TranslationIndex {
     }
 
     @Nullable
-    protected File getTranslationRoot() {
+    protected IFile getTranslationRoot() {
 
         String translationPath = Settings.getInstance(this.project).pathToTranslation;
         if (!FileUtil.isAbsolute(translationPath)) {
             translationPath = project.getBasePath() + "/" + translationPath;
         }
 
-        File file = new File(translationPath);
+        IFile file = FileFactory.create(translationPath);
         if(!file.exists() || !file.isDirectory()) {
             Symfony2ProjectComponent.getLogger().warn("missing translation path: " + file.toString());
             return null;

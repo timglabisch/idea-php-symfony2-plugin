@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.tests.translation.parser;
 
+import fr.adrienbrault.idea.io.File.Filesystem;
 import fr.adrienbrault.idea.symfony2plugin.translation.dict.DomainFileMap;
 import fr.adrienbrault.idea.symfony2plugin.translation.parser.DomainMappings;
 import org.junit.Assert;
@@ -14,7 +15,7 @@ public class DomainMappingsTest extends Assert {
 
     @Test
     public void testParser() {
-        File testFile = new File(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
+        Filesystem testFile = new Filesystem(this.getClass().getResource("appDevDebugProjectContainer.xml").getFile());
 
         DomainMappings bla = new DomainMappings();
         bla.parser(testFile);

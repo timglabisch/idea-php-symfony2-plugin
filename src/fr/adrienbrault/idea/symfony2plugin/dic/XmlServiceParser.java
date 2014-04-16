@@ -1,10 +1,10 @@
 package fr.adrienbrault.idea.symfony2plugin.dic;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.service.AbstractServiceParser;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 
 public class XmlServiceParser extends AbstractServiceParser {
@@ -16,7 +16,7 @@ public class XmlServiceParser extends AbstractServiceParser {
         return "";
     }
 
-    public void parser(File file) {
+    public void parser(IFile file) {
         try {
             // @TODO: make this one beautiful
             ServiceMap serviceMap1 = new ServiceMapParser().parse(file);

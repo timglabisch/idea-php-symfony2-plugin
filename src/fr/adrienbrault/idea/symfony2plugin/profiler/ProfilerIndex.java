@@ -1,21 +1,20 @@
 package fr.adrienbrault.idea.symfony2plugin.profiler;
 
 import com.intellij.openapi.vfs.VfsUtil;
+import fr.adrienbrault.idea.io.FileFactory;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.profiler.dict.ProfilerRequest;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class ProfilerIndex {
 
-    private File file;
+    private IFile file;
 
-    public ProfilerIndex(File file) {
+    public ProfilerIndex(IFile file) {
         this.file = file;
     }
 
@@ -24,14 +23,17 @@ public class ProfilerIndex {
 
         String trennzeichen = ",";
 
+        /**
+         * @TODO TEST!!!!!
+         */
+
+
         try {
-            BufferedReader in = new BufferedReader(new FileReader(this.file));
-            String readString;
-            while ((readString = in.readLine()) != null) {
+
+            for(String readString : this.file.getContents().split(System.getProperty("line.separator"))) {
                 list.add(new ProfilerRequest(readString.split(trennzeichen), this));
             }
 
-            in.close();
         } catch (IOException e) {
 
         }
@@ -48,10 +50,13 @@ public class ProfilerIndex {
     }
 
     @Nullable
-    public File getFile(ProfilerRequest profilerRequest) {
+    public IFile getFile(ProfilerRequest profilerRequest) {
         String path = this.getPath(profilerRequest);
 
-        File file = new File(this.file.getParentFile().getAbsolutePath() + "/" + path);
+        /**
+         * @TODO !!!!!!!!!!
+         */
+        //IFile file = FileFactory.create(this.file.getPath()  + "".getAbsolutePath() + "/" + path);
 
         if(!file.exists()) {
             return null;
@@ -73,25 +78,19 @@ public class ProfilerIndex {
 
     @Nullable
     public String getContent(ProfilerRequest profilerRequest) {
-        File file = this.getFile(profilerRequest);
+        IFile file = this.getFile(profilerRequest);
         if(file == null) {
             return  null;
         }
 
-        StringBuilder content = new StringBuilder();
+        String content = "";
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(file));
-            String str;
-            while ((str = in.readLine()) != null) {
-                content.append(str).append(System.getProperty("line.separator"));
-            }
-            in.close();
+           content = file.getContents();
         } catch (IOException e) {
         }
 
-
-        return content.toString();
+        return content;
     }
 
 }

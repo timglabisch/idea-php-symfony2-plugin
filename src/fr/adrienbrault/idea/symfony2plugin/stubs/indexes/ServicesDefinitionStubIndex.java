@@ -9,6 +9,9 @@ import com.intellij.util.indexing.*;
 import com.intellij.util.io.DataExternalizer;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
+import fr.adrienbrault.idea.io.FileFactory;
+import fr.adrienbrault.idea.io.FileUtil;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import fr.adrienbrault.idea.symfony2plugin.config.xml.XmlHelper;
 import fr.adrienbrault.idea.symfony2plugin.dic.ContainerParameter;
@@ -188,11 +191,13 @@ public class ServicesDefinitionStubIndex extends FileBasedIndexExtension<String,
         }
 
         // dont add configured service paths
-        List<File> settingsServiceFiles = psiFile.getProject().getComponent(Symfony2ProjectComponent.class).getContainerFiles();
-        for(File file: settingsServiceFiles) {
-            if(VfsUtil.isAncestor(VfsUtil.virtualToIoFile(inputData.getFile()), file, false)) {
+        List<IFile> settingsServiceFiles = psiFile.getProject().getComponent(Symfony2ProjectComponent.class).getContainerFiles();
+        for(IFile file: settingsServiceFiles) {
+
+            if(FileUtil.isAncestor(FileFactory.create(VfsUtil.virtualToIoFile(inputData.getFile())), file)) {
                 return false;
             }
+
         }
 
         return true;

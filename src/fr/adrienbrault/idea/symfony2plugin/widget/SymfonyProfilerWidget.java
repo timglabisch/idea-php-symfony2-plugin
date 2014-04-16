@@ -12,6 +12,7 @@ import com.intellij.openapi.wm.StatusBarWidget;
 import com.intellij.openapi.wm.impl.status.EditorBasedWidget;
 import com.intellij.ui.popup.PopupFactoryImpl;
 import com.intellij.util.Consumer;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2Icons;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import fr.adrienbrault.idea.symfony2plugin.profiler.ProfilerIndex;
@@ -25,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.*;
 
 public class SymfonyProfilerWidget extends EditorBasedWidget implements StatusBarWidget.MultipleTextValuesPresentation,  StatusBarWidget.Multiframe {
@@ -52,7 +52,7 @@ public class SymfonyProfilerWidget extends EditorBasedWidget implements StatusBa
     public ActionGroup getActions(){
 
         DefaultActionGroup actionGroup = new DefaultActionGroup(null, false);
-        File profilerCsv = ProfilerUtil.findProfilerCsv(project);
+        IFile profilerCsv = ProfilerUtil.findProfilerCsv(project);
         if(profilerCsv == null) {
             return actionGroup;
         }

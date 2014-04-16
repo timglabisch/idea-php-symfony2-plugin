@@ -1,5 +1,6 @@
 package fr.adrienbrault.idea.symfony2plugin.util.service;
 
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.service.ServiceParserInterface;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
@@ -10,20 +11,19 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
-import java.io.File;
 import java.io.IOException;
 
 abstract public class AbstractServiceParser  implements ServiceParserInterface {
 
     @Nullable
-    protected NodeList parserer(File file) {
+    protected NodeList parserer(IFile file) {
 
         Document document;
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
         try {
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
-            document = documentBuilder.parse(file);
+            document = documentBuilder.parse(file.getInputStream());
         } catch (ParserConfigurationException e) {
             return null;
         } catch (SAXException e) {
