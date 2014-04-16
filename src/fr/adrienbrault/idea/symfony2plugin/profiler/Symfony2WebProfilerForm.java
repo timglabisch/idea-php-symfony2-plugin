@@ -167,7 +167,7 @@ public class Symfony2WebProfilerForm {
         Symfony2ProjectComponent symfony2ProjectComponent = this.project.getComponent(Symfony2ProjectComponent.class);
         for(IFile file: symfony2ProjectComponent.getContainerFiles()) {
             if(file.exists()) {
-                IFile translationRootPath = FileFactory.create(file.getParentFile().getPath() + "/profiler/index.csv");
+                IFile translationRootPath = FileFactory.create(file.getParentFile().getPath() + "/profiler/index.csv", this.project);
                 if (!translationRootPath.exists()) {
                     return translationRootPath;
                 }

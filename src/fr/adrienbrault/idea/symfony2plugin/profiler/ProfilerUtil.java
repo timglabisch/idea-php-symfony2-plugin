@@ -14,7 +14,7 @@ public class ProfilerUtil {
         Symfony2ProjectComponent symfony2ProjectComponent = project.getComponent(Symfony2ProjectComponent.class);
         for(IFile file: symfony2ProjectComponent.getContainerFiles()) {
             if(file.exists()) {
-                IFile translationRootPath = FileFactory.create(file.getParentFile().getPath() + "/profiler/index.csv");
+                IFile translationRootPath = FileFactory.create(file.getParentFile().getPath() + "/profiler/index.csv", project);
                 if (translationRootPath.exists()) {
                     return translationRootPath;
                 }

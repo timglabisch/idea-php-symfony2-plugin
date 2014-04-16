@@ -75,11 +75,8 @@ public class TranslationIndex {
     protected IFile getTranslationRoot() {
 
         String translationPath = Settings.getInstance(this.project).pathToTranslation;
-        if (!FileUtil.isAbsolute(translationPath)) {
-            translationPath = project.getBasePath() + "/" + translationPath;
-        }
 
-        IFile file = FileFactory.create(translationPath);
+        IFile file = FileFactory.create(translationPath, project);
         if(!file.exists() || !file.isDirectory()) {
             Symfony2ProjectComponent.getLogger().warn("missing translation path: " + file.toString());
             return null;

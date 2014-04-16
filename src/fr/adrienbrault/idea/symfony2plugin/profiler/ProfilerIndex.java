@@ -23,13 +23,7 @@ public class ProfilerIndex {
 
         String trennzeichen = ",";
 
-        /**
-         * @TODO TEST!!!!!
-         */
-
-
         try {
-
             for(String readString : this.file.getContents().split(System.getProperty("line.separator"))) {
                 list.add(new ProfilerRequest(readString.split(trennzeichen), this));
             }
@@ -53,10 +47,7 @@ public class ProfilerIndex {
     public IFile getFile(ProfilerRequest profilerRequest) {
         String path = this.getPath(profilerRequest);
 
-        /**
-         * @TODO !!!!!!!!!!
-         */
-        //IFile file = FileFactory.create(this.file.getPath()  + "".getAbsolutePath() + "/" + path);
+        IFile file = FileFactory.create(this.file.getParentFile().getAbsolutePath() + "/" + path);
 
         if(!file.exists()) {
             return null;

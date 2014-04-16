@@ -40,7 +40,7 @@ public class ContainerFile {
 
     @Nullable
     public IFile getFile(Project project) {
-        return FileFactory.create(project.getBaseDir() + "/" + this.path);
+        return FileFactory.create(this.path, project);
     }
 
     public void setPath(String path) {
