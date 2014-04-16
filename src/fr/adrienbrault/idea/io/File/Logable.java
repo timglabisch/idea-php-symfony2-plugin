@@ -7,13 +7,11 @@ import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Logable implements IFile {
-
-    private IFile file;
+public class Logable extends Decorated {
 
     public Logable(IFile file) {
-        this.getLogger().info("File "+ file.getPath() + " is loaded.");
         this.file = file;
+        this.getLogger().info("File " + file.getPath() + " is loaded.");
     }
 
     private Logger getLogger() {
@@ -28,11 +26,6 @@ public class Logable implements IFile {
             this.getLogger().error("IOExcepion when trying to load file "+ this.file.getPath());
             throw e;
         }
-    }
-
-    @Override
-    public String getPath() {
-        return this.file.getPath();
     }
 
     @Override
@@ -58,23 +51,4 @@ public class Logable implements IFile {
 
     }
 
-    @Override
-    public IFile getParentFile() {
-        return this.file.getParentFile();
-    }
-
-    @Override
-    public boolean isDirectory() {
-        return this.file.isDirectory();
-    }
-
-    @Override
-    public Long lastModified() {
-        return this.file.lastModified();
-    }
-
-    @Override
-    public String getAbsolutePath() {
-        return this.file.getAbsolutePath();
-    }
 }
