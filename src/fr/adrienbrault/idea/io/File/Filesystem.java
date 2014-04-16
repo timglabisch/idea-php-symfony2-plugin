@@ -11,7 +11,7 @@ public class Filesystem implements IFile {
     protected String path;
 
     public Filesystem(String path) {
-        this.path = path;
+        this.path = path.replace("file://", "");
     }
 
     public Filesystem(File file) {
