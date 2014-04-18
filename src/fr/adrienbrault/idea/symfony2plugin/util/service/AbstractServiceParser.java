@@ -32,10 +32,6 @@ abstract public class AbstractServiceParser  implements ServiceParserInterface {
             return null;
         }
 
-        if(document == null) {
-            return null;
-        }
-
         Object result;
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();

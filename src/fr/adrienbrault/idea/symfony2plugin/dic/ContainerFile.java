@@ -30,12 +30,7 @@ public class ContainerFile {
     }
 
     public boolean exists(Project project) {
-        if (!FileUtil.isAbsolute(this.path)) {
-            return VfsUtil.findRelativeFile(this.path, project.getBaseDir()) != null;
-        }
-
-        File file = new File(this.path);
-        return file.exists();
+        return this.getFile(project).exists();
     }
 
     @Nullable

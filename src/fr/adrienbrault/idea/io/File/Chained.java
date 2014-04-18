@@ -13,6 +13,7 @@ public class Chained extends Decorated {
         for(IFile file : files) {
             if(file.exists()) {
                 this.file = file;
+                break;
             }
         }
 

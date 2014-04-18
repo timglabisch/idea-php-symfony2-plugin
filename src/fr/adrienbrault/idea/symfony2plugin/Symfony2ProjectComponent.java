@@ -12,6 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.psi.PsiElement;
+import fr.adrienbrault.idea.io.FileFactory;
 import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.dic.ContainerFile;
 import fr.adrienbrault.idea.symfony2plugin.extension.ServiceContainerLoader;
@@ -186,7 +187,7 @@ public class Symfony2ProjectComponent implements ProjectComponent {
         }
 
         String urlGeneratorPath = getPath(project, Settings.getInstance(project).pathToUrlGenerator);
-        File urlGeneratorFile = new File(urlGeneratorPath);
+        IFile urlGeneratorFile = FileFactory.create(Settings.getInstance(project).pathToUrlGenerator, project);
         if (!urlGeneratorFile.exists()) {
             Symfony2ProjectComponent.getLogger().warn("missing routing file: " + urlGeneratorPath);
         }

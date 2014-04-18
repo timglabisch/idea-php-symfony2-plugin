@@ -42,7 +42,7 @@ public class Filesystem implements IFile {
     }
 
     public InputStream getInputStream() throws IOException {
-        InputStream is = new ByteArrayInputStream( this.getContents().getBytes(Charset.forName("UTF-8")) );
+        InputStream is = new ByteArrayInputStream(this.getContents().getBytes(Charset.forName("UTF-8")));
         return is;
     }
 
