@@ -6,7 +6,7 @@ import fr.adrienbrault.idea.io.IFile;
 import java.io.*;
 import java.nio.charset.Charset;
 
-public class Filesystem implements IFile {
+public class Filesystem extends Abstract implements IFile {
 
     protected String path;
 
@@ -41,11 +41,6 @@ public class Filesystem implements IFile {
         return this.path;
     }
 
-    public InputStream getInputStream() throws IOException {
-        InputStream is = new ByteArrayInputStream(this.getContents().getBytes(Charset.forName("UTF-8")));
-        return is;
-    }
-
     public IFile getParentFile() {
         File parentFile = (new File(this.path)).getParentFile();
         return FileFactory.create(parentFile.getPath());
@@ -62,4 +57,5 @@ public class Filesystem implements IFile {
     public String getAbsolutePath() {
         return (new File(this.path)).getAbsolutePath();
     }
+
 }

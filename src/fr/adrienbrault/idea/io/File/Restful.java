@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Restful implements IFile {
+public class Restful extends Abstract implements IFile {
 
     protected String path;
 

@@ -1,5 +1,9 @@
 package fr.adrienbrault.idea.io;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,5 +21,8 @@ public interface IFile {
     public Long lastModified();
 
     public String getAbsolutePath();
+
+    public VirtualFile toVirtualFile(Project p);
+    public PsiFile toPsiFile(Project p);
 
 }
