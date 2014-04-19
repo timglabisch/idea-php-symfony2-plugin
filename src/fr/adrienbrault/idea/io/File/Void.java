@@ -1,6 +1,9 @@
 package fr.adrienbrault.idea.io.File;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 
@@ -46,6 +49,16 @@ public class Void implements IFile {
 
     @Override
     public String getAbsolutePath() {
+        return null;
+    }
+
+    @Override
+    public VirtualFile toVirtualFile(Project project) {
+        return null;
+    }
+
+    @Override
+    public PsiFile toPsiFile(Project project) {
         return null;
     }
 
