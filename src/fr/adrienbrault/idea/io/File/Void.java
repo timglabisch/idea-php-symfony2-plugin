@@ -53,11 +53,6 @@ public class Void implements IFile {
     }
 
     @Override
-    public VirtualFile toVirtualFile(Project project) {
-        return null;
-    }
-
-    @Override
     public PsiFile toPsiFile(Project project) {
         return null;
     }

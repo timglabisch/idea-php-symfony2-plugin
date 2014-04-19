@@ -7,6 +7,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.util.PsiElementUtils;
 
@@ -16,19 +17,17 @@ import java.nio.charset.Charset;
 public abstract class Abstract implements IFile {
 
     @Override
-    public VirtualFile toVirtualFile(Project project) {
+    public PsiFile toPsiFile(Project project) {
+
+        /**
+         * Todo:Check the file type to use the PsiElementFactory for the right Filetype
+         */
+
         try {
-            File f = FileUtil.createTempFile(this.getPath(), ".php");
-            FileUtil.copy(this.getInputStream(), new FileOutputStream(f));
-            return VfsUtil.findFileByIoFile(f, false);
+            return PhpPsiElementFactory.createPsiFileFromText(project, this.getContents());
         } catch (IOException e) {
             return null;
         }
-    }
-
-    @Override
-    public PsiFile toPsiFile(Project project) {
-        return PsiElementUtils.virtualFileToPsiFile(project, this.toVirtualFile(project));
     }
 
     @Override

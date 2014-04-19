@@ -22,7 +22,6 @@ public interface IFile {
 
     public String getAbsolutePath();
 
-    public VirtualFile toVirtualFile(Project p);
     public PsiFile toPsiFile(Project p);
 
 }

@@ -1,11 +1,8 @@
 package fr.adrienbrault.idea.io.File;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import fr.adrienbrault.idea.io.IFile;
-import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,11 +49,6 @@ public class Decorated implements IFile {
     @Override
     public String getAbsolutePath() {
         return this.file.getAbsolutePath();
-    }
-
-    @Override
-    public VirtualFile toVirtualFile(Project project) {
-        return this.file.toVirtualFile(project);
     }
 
     @Override
