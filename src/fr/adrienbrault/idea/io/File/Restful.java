@@ -15,11 +15,16 @@ public class Restful extends Abstract implements IFile {
 
     protected String path;
 
+    protected String content;
+
     public Restful(String path) {
         this.path = path;
     }
 
     private String fetchUrl(String path) throws IOException {
+
+        if(this.content != null)
+            return this.content;
 
         path = "http://symfony.l/app_dev.php/phpstormplugin/resource/" + path;
 
@@ -40,7 +45,7 @@ public class Restful extends Abstract implements IFile {
             response.append('\n');
         }
         rd.close();
-        return response.toString().trim();
+        return this.content = response.toString().trim();
     }
 
     @Override

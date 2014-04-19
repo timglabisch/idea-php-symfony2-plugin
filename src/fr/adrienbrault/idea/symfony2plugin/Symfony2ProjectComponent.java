@@ -108,11 +108,9 @@ public class Symfony2ProjectComponent implements ProjectComponent {
     public Map<String, Route> getRoutes() {
         Map<String, Route> routes = new HashMap<String, Route>();
 
-        String urlGeneratorPath = getPath(project, Settings.getInstance(project).pathToUrlGenerator);
-        File urlGeneratorFile = new File(urlGeneratorPath);
-        VirtualFile virtualUrlGeneratorFile = VfsUtil.findFileByIoFile(urlGeneratorFile, false);
+        IFile urlGeneratorFile = FileFactory.create(Settings.getInstance(project).pathToUrlGenerator, project);
 
-        if (virtualUrlGeneratorFile == null || !urlGeneratorFile.exists()) {
+        if (!urlGeneratorFile.exists()) {
             return routes;
         }
 
@@ -123,7 +121,7 @@ public class Symfony2ProjectComponent implements ProjectComponent {
 
         Symfony2ProjectComponent.getLogger().info("update routing: " + urlGeneratorFile.toString());
 
-        routes = RouteHelper.getRoutes(project, virtualUrlGeneratorFile);
+        routes = RouteHelper.getRoutes(project, urlGeneratorFile);
 
         this.routes = routes;
         this.routesLastModified = routesLastModified;

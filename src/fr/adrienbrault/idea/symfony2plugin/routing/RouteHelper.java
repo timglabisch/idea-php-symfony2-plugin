@@ -19,6 +19,7 @@ import com.jetbrains.php.lang.documentation.phpdoc.parser.PhpDocElementTypes;
 import com.jetbrains.php.lang.documentation.phpdoc.psi.tags.PhpDocTag;
 import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
+import fr.adrienbrault.idea.io.IFile;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2Icons;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2InterfacesUtil;
 import fr.adrienbrault.idea.symfony2plugin.Symfony2ProjectComponent;
@@ -139,16 +140,16 @@ public class RouteHelper {
         return list;
     }
 
-    public static Map<String, Route> getRoutes(Project project, VirtualFile virtualFile) {
+    public static Map<String, Route> getRoutes(Project project, IFile file) {
 
         Map<String, Route> routes = new HashMap<String, Route>();
 
         try {
-            routes.putAll(getRoutes(VfsUtil.loadText(virtualFile)));
+            routes.putAll(getRoutes(file.getContents()));
         } catch (IOException ignored) {
         }
 
-        PsiFile psiFile = PsiElementUtils.virtualFileToPsiFile(project, virtualFile);
+        PsiFile psiFile = file.toPsiFile(project);
         if(!(psiFile instanceof PhpFile)) {
             return routes;
         }
